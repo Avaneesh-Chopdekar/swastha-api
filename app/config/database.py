@@ -1,10 +1,9 @@
-import os
 from pymongo import MongoClient
-from dotenv import load_dotenv
 
-load_dotenv()
+from .env import DB_URI
 
-client = MongoClient(os.getenv("DB_URI"))
+
+client = MongoClient(DB_URI)
 
 
 def get_db():
