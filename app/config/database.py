@@ -1,11 +1,11 @@
 import os
-from beanie import init_beanie
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import MongoClient
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = MongoClient(os.getenv("DB_URI"))
 
 
-async def connect_to_database():
-    # Beanie uses Motor async client under the hood
-    client = AsyncIOMotorClient(os.getenv("DB_URI"))
-
-    # Initialize beanie
-    await init_beanie(database=client.db_name, document_models=[])
+def get_db():
+    return client.get_database("arogyadb")
