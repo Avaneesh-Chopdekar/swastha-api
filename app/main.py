@@ -1,5 +1,7 @@
 from fastapi import FastAPI, status
 
+from app.config.database import get_db
+
 app = FastAPI()
 
 
@@ -11,3 +13,10 @@ app = FastAPI()
 )
 def health_check():
     return {"message": "Server is up and running..."}
+
+
+try:
+    get_db().command("ping")
+    print("Connected to Database successfully...")
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
